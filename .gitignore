@@ -1,0 +1,6 @@
+.env
+.DS_Store
+/ssl/
+/.idea/
+/__pycache__/
+/bug-reproduction/
