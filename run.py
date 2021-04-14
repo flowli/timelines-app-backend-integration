@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import config
+from lib.config import Config
 from lib.imap import Mailbox
 
-config = config.get()
+config = Config().read('.env')
 mailbox = Mailbox(config)
 messages = mailbox.messages()
 
