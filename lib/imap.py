@@ -43,9 +43,8 @@ class Mailbox:
         fetched = self.client.fetch(messageIds, ['FLAGS', 'RFC822.SIZE', 'RFC822', 'BODY[TEXT]'])
 
         # create a simple, useful list of messages
-        email_parser = EMailParser()
         messages = []
         for message_id, data in fetched.items():
-            message = email_parser.message_from_data(data)
+            message = EMailParser.message_from_fetched_data(data)
             messages.append(message)
             return messages

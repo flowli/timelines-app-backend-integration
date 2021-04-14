@@ -2,7 +2,6 @@
 
 from lib.config import Config
 from lib.imap import Mailbox
-import csv
 
 config = Config().read('.env')
 mailbox = Mailbox(config)

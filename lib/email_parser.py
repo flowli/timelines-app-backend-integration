@@ -3,7 +3,7 @@ import re
 
 
 class EMailParser:
-    def message_from_data(self, data):
+    def message_from_fetched_data(data):
         this_email = email.message_from_bytes(data[b'RFC822'])
         parts = this_email.walk()
         i = 0
