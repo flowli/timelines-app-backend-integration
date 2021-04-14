@@ -1,5 +1,6 @@
 from imapclient import IMAPClient
 import ssl
+from .email_parser import EMailParser
 
 
 class Mailbox:
@@ -15,7 +16,7 @@ class Mailbox:
 
     def get_imap_client_instance(self):
         ssl_context = self.get_imap_ssl_context()
-        client = IMAPClient(self.config['imap_host'], ssl_context=ssl_context)
+        client = IMAPClient(self.config['imap_host'], ssl=True, ssl_context=ssl_context, timeout=15, use_uid=True)
         return client
 
     def get_imap_ssl_context(self):
@@ -37,7 +38,14 @@ class Mailbox:
 
     def messages(self):
         # search criteria are passed in a straightforward way (nesting is supported)
-        messages = self.client.search(['NOT', 'DELETED'])
+        messageIds = self.client.search(['NOT', 'DELETED'])
         # fetch selectors are passed as a simple list of strings.
-        response = self.client.fetch(messages, ['FLAGS', 'RFC822.SIZE'])
-        return response.items()
+        fetched = self.client.fetch(messageIds, ['FLAGS', 'RFC822.SIZE', 'RFC822', 'BODY[TEXT]'])
+
+        # create a simple, useful list of messages
+        email_parser = EMailParser()
+        messages = []
+        for message_id, data in fetched.items():
+            message = email_parser.message_from_data(data)
+            messages.append(message)
+            return messages
