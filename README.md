@@ -1,10 +1,10 @@
-# Timelines iOS App
+# Timelines App Backend Integration
 
 ## Technical concept for backend integration via IMAP accounts
 
 ### Idea (last change: Apr 13, 2021)
 1. Track time
-    - Time tracked in the Timelines App (available for iOS) can be exported to CSV
+    - Time tracked in the [Timelines App](https://timelines.app) can be exported to CSV
     - We need the CSV format "Detailed" that requires a "Pro" subscription (currently costs around 20 € per year and user)
     - That CSV format can - at any point in time - be manually shared to an e-mail address. This should be done before invoicing takes place.
 2. With this mechanism this processor can automatically determine important fields of tracked time spans:
