@@ -25,11 +25,11 @@ pip3 install imapclient python-dotenv pickledb
 1. Set environment variables. You can:
     - set environment variables (see `.env.example` for a list) in your machine or container
     - copy `.env.example` to `.env` and customize it to your needs
-    - in case of GMail, you'll probably need to run two steps to access IMAP:
-        - Allow "less secure apps" on https://myaccount.google.com/lesssecureapps?pli=1
-        - GMail ➡ All Settings ➡ Forwarding and POP / IMAP ➡ Enable IMAP access
-
-2. Define a CA Bundle. You could follow https://stackoverflow.com/questions/39356413/how-to-add-a-custom-ca-root-certificate-to-the-ca-store-used-by-pip-in-windows
+    - it's likely wise to make sure your imap server has a valid certificate
+    - feel encouraged to write your own backend plugin - check out printer_example.py for a trivial example
 
 ### Deployment
-#### TODO: write this (like "run run.py as cron as often as needed")
+1. clone this repo
+2. configure as described above
+3. call run.py as often as needed, i. e. using a cronjob
+4. sent donations or complaints ;-)

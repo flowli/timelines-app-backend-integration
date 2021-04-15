@@ -8,12 +8,6 @@ from lib.imap import Mailbox
 from lib.attachment_timespan_reader import AttachmentTimespanReader
 from lib.processed import Processed
 
-# Left TODO:
-# 1. remember which ids were processed and do not repeat them (see git history for removed code)
-#     - use processed.py
-# 2. backend implementation for 安龙's invoicing system
-
-
 # 1. connect to mailbox
 config = Config().read('.env')
 mailbox = Mailbox(config)
