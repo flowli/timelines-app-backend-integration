@@ -14,7 +14,7 @@
 3. Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
 
 ## Implementation
-### Installation of dependencies
+### Installation
 1. ensure python3 is installed
 2. run
 ````
