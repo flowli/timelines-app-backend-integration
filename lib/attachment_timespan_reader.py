@@ -4,7 +4,11 @@ from lib.entities.timespan import Timespan
 
 
 class AttachmentTimespanReader:
+    processed = None
     timespans = []
+
+    def __init__(self, processed=None):
+        self.processed = processed
 
     def add(self, message, attachment_payload):
         iterable = StringIO(attachment_payload.decode('utf-8'))
@@ -21,4 +25,9 @@ class AttachmentTimespanReader:
             timespan.stop = row[2]
             timespan.title = row[4]
             timespan.note = row[5]
-            self.timespans.append(timespan)
+            processed_marking_active = self.processed is not None
+            if processed_marking_active:
+                if self.processed.not_yet(timespan):
+                    self.timespans.append(timespan)
+            else:
+                self.timespans.append(timespan)

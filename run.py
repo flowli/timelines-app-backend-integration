@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
+import os
 import sys
 import importlib
 from lib.config import Config
 from lib.imap import Mailbox
 from lib.attachment_timespan_reader import AttachmentTimespanReader
+from lib.processed import Processed
 
 # Left TODO:
 # 1. remember which ids were processed and do not repeat them (see git history for removed code)
@@ -22,7 +24,13 @@ if messages is None:
     sys.exit(0)
 
 # 3. turn attachments into timespans
-reader = AttachmentTimespanReader()
+db_dir = os.path.dirname(os.path.realpath(__file__)) + '/db'
+if config['timespans_add_each_id_only_once']:
+    processed = Processed('timespans', db_dir)
+    reader = AttachmentTimespanReader(processed)
+else:
+    processed = None
+    reader = AttachmentTimespanReader()
 for message in messages:
     for attachment in message['attachments']:
         reader.add(message, attachment_payload=attachment['payload'])
