@@ -35,7 +35,8 @@ backend_class = getattr(backend_module, config['backend_class'])
 backend = backend_class()
 for timespan in reader.timespans:
     backend.deliver_timespan(timespan)
-    processed.now(timespan)
+    if processed is not None:
+        processed.now(timespan)
 
 # 5. move successfully processed emails to processed folder
 if config['imap_move_processed_messages']:
