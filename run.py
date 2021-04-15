@@ -24,7 +24,7 @@ if messages is None:
     sys.exit(0)
 
 # 3. turn attachments into timespans
-db_dir = os.path.dirname(os.path.realpath(__file__)) + '/db'
+db_dir = os.path.dirname(os.path.realpath(__file__)) + '/storage/processed'
 if config['timespans_add_each_id_only_once']:
     processed = Processed('timespans', db_dir)
     reader = AttachmentTimespanReader(processed)
@@ -41,6 +41,7 @@ backend_class = getattr(backend_module, config['backend_class'])
 backend = backend_class()
 for timespan in reader.timespans:
     backend.deliver_timespan(timespan)
+    processed.now(timespan)
 
 # 5. move successfully processed emails to processed folder
 if config['imap_move_processed_messages']:
