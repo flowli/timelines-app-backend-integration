@@ -15,6 +15,9 @@
 3. [Not coded yet] Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
 
 ## User Guide
+### Caveats
+1. This tool identifies time spans using their timeline name and the starting time. So whenever one or both of the two change it counts as a new timespan and gets re-imported. This could be fixed by Timelines App providing a unique identifier for timespans in the CSV data and this tool using that is the new identifier.
+
 ### Installation
 1. Ensure python3 is installed
 2. Install the following python3 modules, i. e. with pip3:
