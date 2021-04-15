@@ -3,7 +3,7 @@
 ## Technical Concept
 
 ### Idea
-*TL;DR: [Timelines App](https://timelines.app) 👉 Share Detailed CSV via E-Mail 👉 Collect using IMAP 👉 Deliver to Backend*
+*TL;DR: [Timelines App](https://timelines.app) 👉 Share detailed CSV via E-Mail 👉 Collect using IMAP 👉 Deliver time spans to your backend*
 
 1. Track time
     - Time tracked in the [Timelines App](https://timelines.app) can be exported to CSV
