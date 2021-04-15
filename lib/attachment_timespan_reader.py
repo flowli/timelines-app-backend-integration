@@ -6,7 +6,7 @@ from lib.entities.timespan import Timespan
 class AttachmentTimespanReader:
     timespans = []
 
-    def add(self, attachment_payload):
+    def add(self, message, attachment_payload):
         iterable = StringIO(attachment_payload.decode('utf-8'))
         reader = csv.reader(iterable, delimiter=',')
         i = 0
@@ -15,7 +15,7 @@ class AttachmentTimespanReader:
             if i == 1:  # skip header row
                 continue
             timespan = Timespan()
-            timespan.id
+            timespan.user = message['from']
             timespan.timeline = row[0]
             timespan.start = row[1]
             timespan.stop = row[2]

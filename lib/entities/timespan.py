@@ -6,8 +6,8 @@ class Timespan:
     note = None
 
     def id(self):
-        # @Timelines App: could you provide a unique id in the CSV file?
-        # Then the following hack would no longer be needed.
+        # TODO @Timelines App: could you provide a unique id in the CSV file?
+        # (Then this hack would could be replaced with perfect simplicity and functionality.)
         return self.timeline + "🏓易💜经⏳️" + self.start
 
     def __eq__(self, other):
@@ -16,11 +16,13 @@ class Timespan:
     def __repr__(self):
         lines = [
             "+-----------------------------------------------------------+",
-            "Timeline: " + self.timeline,
-            "Start: " + self.start,
-            "Stop: " + self.stop,
-            "Title: " + self.title,
-            "Note: " + self.note,
+            "| User: " + self.user,
+            "| Timeline: " + self.timeline,
+            "| Start: " + self.start,
+            "| Stop: " + self.stop,
+            "| Title: " + self.title,
+            "| Note: " + self.note,
             "+-----------------------------------------------------------+",
+            "",
         ]
         return "\n".join(lines)

@@ -36,16 +36,33 @@ class Mailbox:
                                             keyfile=self.config['imap_key_file'])
         return ssl_context
 
+    def move_to_processed_folder(self, messages):
+        # make sure the processed folder exists
+        self.client.create_folder(self.config['imap_processed_folder'])
+
+        # move messages over
+        message_unique_ids = []
+        for message in messages:
+            message_unique_ids.append(message['id'])
+        if len(message_unique_ids):
+            self.client.move(message_unique_ids, self.config['imap_processed_folder'])
+
     def messages(self, attachment_suffix_filter=None):
         # search criteria are passed in a straightforward way (nesting is supported)
-        messageIds = self.client.search(['NOT', 'DELETED'])
+        message_ids = self.client.search(['NOT', 'DELETED'])
+
         # fetch selectors are passed as a simple list of strings.
-        fetched = self.client.fetch(messageIds, ['FLAGS', 'RFC822.SIZE', 'RFC822', 'BODY[TEXT]'])
+        fetched = self.client.fetch(message_ids, ['FLAGS', 'RFC822.SIZE', 'RFC822', 'BODY[TEXT]'])
 
         # create a simple, useful list of messages
         messages = []
+        email_parser = EMailParser()
         for message_id, data in fetched.items():
-            message = EMailParser.message_from_fetched_data(data, attachment_suffix_filter=attachment_suffix_filter)
+            message = email_parser.message_from_fetched_data(message_id, data,
+                                                             attachment_suffix_filter=attachment_suffix_filter)
             if attachment_suffix_filter is None or len(message['attachments']) > 0:
                 messages.append(message)
             return messages
+
+    def close(self):
+        self.client.shutdown()
