@@ -17,7 +17,7 @@
 ## User Guide
 ### Caveats
 1. This tool identifies time spans using their timeline name and the starting time. So whenever one or both of the two change it counts as a new timespan and gets re-imported. This could be fixed by Timelines App providing a unique identifier for timespans in the CSV data and this tool using that is the new identifier.
-2. The *project identifier* needs to be *manually encoded by the Timelines user* (either in the *Timeline* or the *Event*) to be able to automatically extract it and forward it to your backend.
+2. The *project identifier* needs to be *manually encoded by the Timelines user* (either in the *Timeline* or the *Event*) to be able to automatically extract it and forward it to your backend. A simple way is to add `#<your company's project id>` to the Timeline name and using a regexp matching in your backend plugin.
 
 ### Installation
 1. Ensure python3 is installed
