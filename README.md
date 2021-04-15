@@ -1,4 +1,4 @@
-# Timelines App Backend Integration via IMAP
+# Timelines App Backend Integration via IMAP/CSV
 
 ## Technical Concept
 
