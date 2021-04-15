@@ -8,20 +8,19 @@ class EMailParser:
             attachment_suffix_filter = attachment_suffix_filter.lower()
         this_email = email.message_from_bytes(data[b'RFC822'])
         parts = this_email.walk()
-        i = 0
         message = {
             'subject': '',
             'from': '',
             'attachments': []
         }
+        # look at all email parts
         for part in parts:
-            i = i + 1
-            # detect subject
+            # detect subject in part
             if part['from'] is not None:
                 message['from'] = part['from']
             if part['subject'] is not None:
                 message['subject'] = part['subject']
-            # detect attachment
+            # detect attachment in part
             if part.get_content_disposition() == 'attachment':
                 filename = part.get_filename()
                 payload = part.get_payload(decode=True)
