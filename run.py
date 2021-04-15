@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
+import sys
+import importlib
 from lib.config import Config
 from lib.imap import Mailbox
 from lib.attachment_timespan_reader import AttachmentTimespanReader
-import sys
-import importlib
 
 # Left TODO:
 # 1. remember which ids were processed and do not repeat them (see git history for removed code)
@@ -18,11 +18,11 @@ mailbox = Mailbox(config)
 
 # 2. fetch emails with a csv attachment
 messages = mailbox.messages(attachment_suffix_filter='csv')
+if messages is None:
+    sys.exit(0)
 
 # 3. turn attachments into timespans
 reader = AttachmentTimespanReader()
-if messages is None:
-    sys.exit(0)
 for message in messages:
     for attachment in message['attachments']:
         reader.add(message, attachment_payload=attachment['payload'])
