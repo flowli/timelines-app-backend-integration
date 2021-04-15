@@ -16,10 +16,10 @@
 ## Implementation
 ### Installation
 1. ensure python3 is installed
-2. run
-````
-pip3 install imapclient python-dotenv pickledb
-````
+2. install the following python3 modules:
+    - python-dotenv
+    - imapclient
+    - pickledb
 
 ### Configuration
 1. Set environment variables. You can:
