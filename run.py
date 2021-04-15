@@ -28,17 +28,14 @@ for message in messages:
         reader.add(message, attachment_payload=attachment['payload'])
 
 # 4. deliver timespans to backend
-backend_module = importlib.import_module(config['BACKEND_MODULE'])
-backend_class = getattr(backend_module, config['BACKEND_CLASS'])
-backend_object = backend_class()
-successful_so_far = True
+backend_module = importlib.import_module(config['backend_module'])
+backend_class = getattr(backend_module, config['backend_class'])
+backend = backend_class()
 for timespan in reader.timespans:
-    print("👉 Processing timespan:")
-    print(timespan)
-    successful_so_far = True  # TODO: set success depending on your backend module
+    backend.deliver_timespan(timespan)
 
 # 5. move successfully processed emails to processed folder
-if config['imap_move_processed_messages'] and successful_so_far:
+if config['imap_move_processed_messages']:
     mailbox.move_to_processed_folder(messages)
 
 # 6. disconnect from mailbox

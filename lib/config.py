@@ -15,7 +15,9 @@ class Config:
             'imap_cert_allow_other': 'off',
             'imap_cert_file': '',
             'imap_key_file': '',
-            'timespans_add_each_id_only_once': True
+            'timespans_add_each_id_only_once': True,
+            'backend_module': 'lib.backends.printer_example',
+            'backend_class': 'PrinterExample',
         }
         config = {}
         # assign
