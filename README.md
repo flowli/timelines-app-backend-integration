@@ -1,22 +1,22 @@
-# Timelines App Backend Integration
+# Timelines App Backend Integration via IMAP
 
-## Technical concept for backend integration via IMAP accounts
+## Technical Concept
 
-### Idea (last change: Apr 13, 2021)
+### Idea
 1. Track time
     - Time tracked in the [Timelines App](https://timelines.app) can be exported to CSV
     - We need the CSV format "Detailed" that requires a "Pro" subscription (currently costs around 20 € per year and user)
-    - That CSV format can - at any point in time - be manually shared to an e-mail address. This should be done before invoicing takes place.
-2. With this mechanism this processor can automatically determine important fields of tracked time spans:
-    - The user is identified by the e-mail's sender address
-    - Security can be enhanced with a required, short smtp relaying path, e-mail encryption or a simple passphrase somewhere in e-mails can be required for each user
-    - The project identifier needs to be encoded in the timeline name (using the characters `#<company-wide project id>`)
-3. Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
+    - That CSV format can - at any point in time - be manually shared to an e-mail address. This should be done before reasonable invoicing can take place.
+2. With this mechanism this integration can automatically determine important fields of tracked time spans:
+    - The user can be identified by the e-mail's sender address
+    - [Not coded yet] security can be enhanced with a required, short smtp relaying path, e-mail encryption or a simple passphrase somewhere in e-mails can be required for each user
+    - The project identifier can to be encoded in the timeline name (using the characters `#<company-wide project id>`) and interpreted in your backend plugin
+3. [Not coded yet] Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
 
 ## Implementation
 ### Installation
-1. ensure python3 is installed
-2. install the following python3 modules:
+1. Ensure python3 is installed
+2. Install the following python3 modules, i. e. with pip3:
     - python-dotenv
     - imapclient
     - pickledb
