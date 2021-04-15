@@ -2,7 +2,6 @@
 
 ## Technical Concept
 
-### Idea
 *TL;DR: [Timelines App](https://timelines.app) 👉 Share detailed CSV via E-Mail 👉 Collect using IMAP 👉 Deliver time spans to your backend*
 
 1. Track time
