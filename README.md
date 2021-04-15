@@ -18,7 +18,7 @@
 1. ensure python3 is installed
 2. run
 ````
-pip3 install imapclient python-dotenv
+pip3 install imapclient python-dotenv pickledb
 ````
 
 ### Configuration
