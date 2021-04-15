@@ -38,4 +38,4 @@
 1. clone this repo
 2. configure as described above
 3. call run.py as often as needed, i. e. using a cronjob
-4. 🥳? buy me a ☕️ (paypal einkauf@arweb.de) or 😤? open an issue
+4. 🥳? buy me a ☕️ (paypal einkauf@arweb.de) or 😤? open an issue or fork this repo
