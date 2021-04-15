@@ -1,6 +1,3 @@
-import json
-
-
 class Timespan:
     timeline = None
     start = None
