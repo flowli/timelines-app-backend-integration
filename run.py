@@ -3,12 +3,11 @@
 from lib.config import Config
 from lib.imap import Mailbox
 from lib.attachment_timespan_reader import AttachmentTimespanReader
-from lib.processed import Processed
-import os
 
 # Left TODO:
-# - better Exception handling?
-
+# - identify user by sender email
+# - identify project by timeline substring matching
+# - …and write to log for when any of the above fails
 
 # 1. connect to mailbox
 config = Config().read('.env')
@@ -23,19 +22,15 @@ for message in messages:
     for attachment in message['attachments']:
         reader.add(attachment_payload=attachment['payload'])
 
-# 4. process new (=previously unprocessed) timespans
-db_dir = os.path.dirname(os.path.realpath(__file__)) + '/db'
-processed = Processed('timespans', db_dir)
+# 4. process timespans - TODO: add your backend communication here
+successful_so_far = True
 for timespan in reader.timespans:
-    if processed.has_been(timespan):
-        print('⏭ Skipping timespan "' + timespan.id() + '"')
-    if processed.not_yet(timespan):
-        print("👉 Processing timespan")
-        processed.now(timespan)
+    print("👉 Processing timespan")
+    successful_so_far = True  # TODO: set success depending on your backend module
 
-# 5. delete successfully processed emails
-if config['imap_delete_mail_when_processed']:
-    print("deleting")
+# 5. move successfully processed emails to processed folder
+if successful_so_far:
+    mailbox.move_to_processed_folder(messages)
 
 # 6. disconnect from mailbox
 # mailbox.client.disconnect?

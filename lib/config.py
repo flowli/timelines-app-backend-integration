@@ -10,10 +10,10 @@ class Config:
             'imap_username': 'username',
             'imap_password': 'password',
             'imap_search_folder': 'INBOX',
+            'imap_processed_folder': 'PROCESSED',
             'imap_cert_allow_other': 'off',
             'imap_cert_file': '',
-            'imap_key_file': '',
-            'imap_delete_mail_when_processed': True
+            'imap_key_file': ''
         }
         config = {}
         # assign
@@ -21,6 +21,5 @@ class Config:
             config[key] = os.getenv(key.upper()) or defaultValue
         # transform data types as expected by consumers
         config['imap_cert_allow_other'] = config['imap_cert_allow_other'].lower()
-        config['imap_delete_mail_when_processed'] = config['imap_delete_mail_when_processed'].lower() != 'false'
         # provide the config dict
         return config
