@@ -25,6 +25,7 @@
     - python-dotenv
     - imapclient
     - pickledb
+3. If your backend plugin should do HTTPS requests, you could use the [requests](https://docs.python-requests.org/en/master/) package.
 
 ### Configuration
 1. Set environment variables. You can:
