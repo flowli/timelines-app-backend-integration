@@ -1,8 +1,10 @@
-# Timelines App Backend Integration - using IMAP + CSV
+# Timelines App Backend Integration
 
 ## Technical Concept
 
 ### Idea
+*TL;DR: [Timelines App](https://timelines.app) 👉 Share detailed CSV via E-Mail 👉 Collect using IMAP 👉 Deliver time spans to your backend*
+
 1. Track time
     - Time tracked in the [Timelines App](https://timelines.app) can be exported to CSV
     - We need the CSV format "Detailed" that requires a "Pro" subscription (currently costs around 20 € per year and user)
