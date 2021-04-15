@@ -1,3 +1,6 @@
+import json
+
+
 class Timespan:
     timeline = None
     start = None
@@ -6,7 +9,9 @@ class Timespan:
     note = None
 
     def id(self):
-        return hash(frozenset({'timeline': self.timeline, 'start': self.start}))
+        # @Timelines App: could you provide a unique id in the CSV file?
+        # Then the following hack would no longer be needed.
+        return self.timeline + "🏓易💜经⏳️" + self.start
 
     def __eq__(self, other):
         return self.id() == other.id()

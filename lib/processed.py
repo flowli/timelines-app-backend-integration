@@ -13,6 +13,8 @@ class Processed:
     def now(self, entity):
         self.db.set(self.entity_name + "=" + str(entity.id()), True)
 
+    def has_been(self, entity):
+        return not self.not_yet(entity)
+
     def not_yet(self, entity):
-        print(self.db.get(self.entity_name + "=" + str(entity.id())))
-        return True
+        return self.db.get(self.entity_name + "=" + str(entity.id())) is False
