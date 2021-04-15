@@ -1,4 +1,5 @@
 class Timespan:
+    user = None
     timeline = None
     start = None
     stop = None

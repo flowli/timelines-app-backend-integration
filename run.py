@@ -4,12 +4,13 @@ from lib.config import Config
 from lib.imap import Mailbox
 from lib.attachment_timespan_reader import AttachmentTimespanReader
 import sys
+import importlib
 
 # Left TODO:
-# - remember which ids were processed and do not repeat them (see git history for removed code)
-# - identify user by sender email
-# - identify project by timeline substring matching
-# - …and write to log for when any of the above fails
+# 1. remember which ids were processed and do not repeat them (see git history for removed code)
+#     - use processed.py
+# 2. backend implementation for 安龙's invoicing system
+
 
 # 1. connect to mailbox
 config = Config().read('.env')
@@ -22,12 +23,14 @@ messages = mailbox.messages(attachment_suffix_filter='csv')
 reader = AttachmentTimespanReader()
 if messages is None:
     sys.exit(0)
-
 for message in messages:
     for attachment in message['attachments']:
         reader.add(message, attachment_payload=attachment['payload'])
 
-# 4. process timespans - TODO: add your backend communication here
+# 4. deliver timespans to backend
+backend_module = importlib.import_module(config['BACKEND_MODULE'])
+backend_class = getattr(backend_module, config['BACKEND_CLASS'])
+backend_object = backend_class()
 successful_so_far = True
 for timespan in reader.timespans:
     print("👉 Processing timespan:")
