@@ -13,7 +13,7 @@
     - The project identifier can to be encoded in the timeline name (using the characters `#<company-wide project id>`) and interpreted in your backend plugin
 3. [Not coded yet] Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
 
-## Implementation
+## User Guide
 ### Installation
 1. Ensure python3 is installed
 2. Install the following python3 modules, i. e. with pip3:
