@@ -5,7 +5,7 @@ from lib.imap import Mailbox
 
 config = Config().read('.env')
 mailbox = Mailbox(config)
-messages = mailbox.messages()
+messages = mailbox.messages(attachment_suffix_filter='csv')
 
 # iterate over fetched mails
 for message in messages:

@@ -36,7 +36,7 @@ class Mailbox:
                                             keyfile=self.config['imap_key_file'])
         return ssl_context
 
-    def messages(self):
+    def messages(self, attachment_suffix_filter=None):
         # search criteria are passed in a straightforward way (nesting is supported)
         messageIds = self.client.search(['NOT', 'DELETED'])
         # fetch selectors are passed as a simple list of strings.
@@ -45,6 +45,7 @@ class Mailbox:
         # create a simple, useful list of messages
         messages = []
         for message_id, data in fetched.items():
-            message = EMailParser.message_from_fetched_data(data)
-            messages.append(message)
+            message = EMailParser.message_from_fetched_data(data, attachment_suffix_filter=attachment_suffix_filter)
+            if attachment_suffix_filter is None or len(message['attachments']) > 0:
+                messages.append(message)
             return messages
