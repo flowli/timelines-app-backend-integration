@@ -9,7 +9,7 @@ from lib.attachment_timespan_reader import AttachmentTimespanReader
 from lib.processed import Processed
 
 # 1. connect to mailbox
-config = Config().read('.env')
+config = Config('.env').read()
 mailbox = Mailbox(config)
 
 # 2. fetch emails with a csv attachment

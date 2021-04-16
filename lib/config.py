@@ -3,8 +3,14 @@ import os
 
 
 class Config:
-    def read(self, env_filename):
-        load_dotenv(env_filename)
+    env_filename = None
+
+    def __init__(self, env_filename):
+        self.env_filename = env_filename
+
+    # returns all config options as a dict. transforms on/off to Python bool.
+    def read(self):
+        load_dotenv(self.env_filename)
         keys_with_defaults = {
             'imap_host': 'imap.example.com',
             'imap_username': 'username',
@@ -30,6 +36,14 @@ class Config:
 
         # provide the config dict
         return config
+
+    # returns config value from read() if found, else returns environment variable value
+    def get(self, key):
+        standard_config = self.read()
+        if standard_config.get(key):
+            return standard_config[key]
+        else:
+            return os.getenv(key.upper())
 
     def on_off_to_bool(string):
         return string.lower() != 'off'
