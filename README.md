@@ -32,10 +32,10 @@
     - feel encouraged to write your own backend plugin - check out printer_example.py for a trivial example
 
 ### Deployment
-1. clone this repo
-2. configure as described above
-3. call run.py as often as needed, i. e. using a cronjob
-4. monitoring:
+1. Clone this repo
+2. Configure as described above
+3. Call run.py as often as needed, i. e. using a cronjob
+4. Monitoring:
     - make sure you get informed if the run.py exit code is not zero
     - you can log/append start+end date of runs as well as std{out,err} somewhere for reference
 5. 🥳? buy me a ☕️ (paypal einkauf@arweb.de) or 😤? open an issue or fork this repo
