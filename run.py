@@ -8,8 +8,10 @@ from lib.imap import Mailbox
 from lib.attachment_timespan_reader import AttachmentTimespanReader
 from lib.processed import Processed
 
+app_path = os.path.dirname(os.path.realpath(__file__))
+
 # 1. connect to mailbox
-config = Config('.env').read()
+config = Config(app_path + '/.env').read()
 mailbox = Mailbox(config)
 
 # 2. fetch emails with a csv attachment
@@ -18,7 +20,7 @@ if messages is None:
     sys.exit(0)
 
 # 3. turn attachments into timespans
-db_dir = os.path.dirname(os.path.realpath(__file__)) + '/storage/processed'
+db_dir = app_path + '/storage/processed'
 if config['timelines_events_add_each_id_only_once']:
     processed = Processed('timespans', db_dir)
     reader = AttachmentTimespanReader(processed)
