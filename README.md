@@ -38,4 +38,7 @@
 1. clone this repo
 2. configure as described above
 3. call run.py as often as needed, i. e. using a cronjob
-4. 🥳? buy me a ☕️ (paypal einkauf@arweb.de) or 😤? open an issue or fork this repo
+4. monitoring:
+    - make sure you get informed if the run.py exit code is not zero
+    - you can log/append start+end date of runs as well as std{out,err} somewhere for reference
+5. 🥳? buy me a ☕️ (paypal einkauf@arweb.de) or 😤? open an issue or fork this repo
