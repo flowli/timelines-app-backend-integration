@@ -21,10 +21,7 @@
 
 ### Installation
 1. Ensure python3 is installed
-2. Install the following python3 modules, i. e. with pip3:
-    - python-dotenv
-    - imapclient
-    - pickledb
+2. Install the dependencies, i.e. with `pip3 install python-dotenv==0.17.0 imapclient==2.2.0 pickledb==0.9.2`
 3. If your backend plugin should do HTTPS requests, you could use the [requests](https://docs.python-requests.org/en/master/) package.
 
 ### Configuration
