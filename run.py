@@ -19,7 +19,7 @@ if messages is None:
 
 # 3. turn attachments into timespans
 db_dir = os.path.dirname(os.path.realpath(__file__)) + '/storage/processed'
-if config['timespans_add_each_id_only_once']:
+if config['timelines_events_add_each_id_only_once']:
     processed = Processed('timespans', db_dir)
     reader = AttachmentTimespanReader(processed)
 else:
@@ -34,7 +34,7 @@ backend_module = importlib.import_module(config['backend_module'])
 backend_class = getattr(backend_module, config['backend_class'])
 backend = backend_class()
 for timespan in reader.timespans:
-    backend.deliver_timespan(timespan)
+    backend.deliver_timelines_event(timespan)
     if processed is not None:
         processed.now(timespan)
 

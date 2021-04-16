@@ -1,6 +1,6 @@
 from io import StringIO
 import csv
-from lib.entities.timespan import Timespan
+from lib.entities.timelines_event import TimelinesEvent
 
 
 class AttachmentTimespanReader:
@@ -18,7 +18,7 @@ class AttachmentTimespanReader:
             i = i + 1
             if i == 1:  # skip header row
                 continue
-            timespan = Timespan()
+            timespan = TimelinesEvent()
             timespan.user = message['from']
             timespan.timeline = row[0]
             timespan.start = row[1]

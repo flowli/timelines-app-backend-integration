@@ -21,7 +21,7 @@ class Config:
             'imap_cert_allow_other': 'off',
             'imap_cert_file': '',
             'imap_key_file': '',
-            'timespans_add_each_id_only_once': True,
+            'timelines_events_add_each_id_only_once': True,
             'backend_module': 'lib.backends.printer_example',
             'backend_class': 'PrinterExample',
         }
@@ -32,7 +32,7 @@ class Config:
         # transform data types as expected by consumers
         config['imap_cert_allow_other'] = config['imap_cert_allow_other'].lower()
         config['imap_move_processed_messages'] = Config.on_off_to_bool(config['imap_move_processed_messages'])
-        config['timespans_add_each_id_only_once'] = Config.on_off_to_bool(config['timespans_add_each_id_only_once'])
+        config['timelines_events_add_each_id_only_once'] = Config.on_off_to_bool(config['timelines_events_add_each_id_only_once'])
 
         # provide the config dict
         return config

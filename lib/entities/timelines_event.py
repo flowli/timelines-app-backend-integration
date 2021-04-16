@@ -1,4 +1,4 @@
-class Timespan:
+class TimelinesEvent:
     user = None
     timeline = None
     start = None
