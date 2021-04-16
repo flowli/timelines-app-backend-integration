@@ -1,5 +1,6 @@
 .env
+.gitmodules
 .DS_Store
 /ssl/
 /.idea/
-/__pycache__/
+**/__pycache__/
