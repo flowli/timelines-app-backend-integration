@@ -26,7 +26,7 @@ class TimelinesEvent:
             "| Title: " + self.title,
             "| Note: " + self.note,
             "+- Derived ------------------------------------------------------+",
-            "| Project #: " + self.project_id,
+            "| Project #: " + (self.project_id if self.project_id else ''),
             "+----------------------------------------------------------------+",
             "",
         ]
