@@ -3,9 +3,9 @@ import csv
 from lib.entities.timelines_event import TimelinesEvent
 
 
-class AttachmentTimespanReader:
+class AttachmentEventsReader:
     processed = None
-    timespans = []
+    events = []
 
     def __init__(self, processed=None):
         self.processed = processed
@@ -18,16 +18,16 @@ class AttachmentTimespanReader:
             i = i + 1
             if i == 1:  # skip header row
                 continue
-            timespan = TimelinesEvent()
-            timespan.user = message['from']
-            timespan.timeline = row[0]
-            timespan.start = row[1]
-            timespan.stop = row[2]
-            timespan.title = row[4]
-            timespan.note = row[5]
+            event = TimelinesEvent()
+            event.user = message['from']
+            event.timeline = row[0]
+            event.start = row[1]
+            event.stop = row[2]
+            event.title = row[4]
+            event.note = row[5]
             processed_marking_active = self.processed is not None
             if processed_marking_active:
-                if self.processed.not_yet(timespan):
-                    self.timespans.append(timespan)
+                if self.processed.not_yet(event):
+                    self.events.append(event)
             else:
-                self.timespans.append(timespan)
+                self.events.append(event)
