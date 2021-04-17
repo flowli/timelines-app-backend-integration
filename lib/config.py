@@ -4,6 +4,7 @@ import os
 
 class Config:
     env_filename = None
+    read_cache = None
 
     def __init__(self, env_filename):
         self.env_filename = env_filename
@@ -32,16 +33,18 @@ class Config:
         # transform data types as expected by consumers
         config['imap_cert_allow_other'] = config['imap_cert_allow_other'].lower()
         config['imap_move_processed_messages'] = Config.on_off_to_bool(config['imap_move_processed_messages'])
-        config['timelines_events_add_each_id_only_once'] = Config.on_off_to_bool(config['timelines_events_add_each_id_only_once'])
+        config['timelines_events_add_each_id_only_once'] = Config.on_off_to_bool(
+            config['timelines_events_add_each_id_only_once'])
 
         # provide the config dict
         return config
 
     # returns config value from read() if found, else returns environment variable value
     def get(self, key):
-        standard_config = self.read()
-        if standard_config.get(key):
-            return standard_config[key]
+        if self.read_cache is None:
+            self.read_cache = self.read()
+        if self.read_cache[key.lower()] is not None:
+            return self.read_cache[key.lower()]
         else:
             return os.getenv(key.upper())
 
