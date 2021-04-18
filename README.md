@@ -41,4 +41,4 @@ see [LICENSE.md](LICENSE.md)
 4. Monitoring:
     - make sure you get informed if the run.py exit code is not zero
     - you can log/append start+end date of runs as well as std{out,err} somewhere for reference
-5. 🥳? buy me a ☕️ (paypal einkauf@arweb.de) or 😤? open an issue or fork this repo
+5. 🥳? buy me a ☕️ (you can paypal to florian.arndt@gmail.com) or 😤? open an issue or fork this repo
