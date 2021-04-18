@@ -11,7 +11,7 @@ from lib.processed import Processed
 app_path = os.path.dirname(os.path.realpath(__file__))
 
 # 1. connect to mailbox
-config = Config(app_path + '/.env').read()
+config = Config(app_path + '/.env')
 mailbox = Mailbox(config)
 
 # 2. fetch emails with a csv attachment
@@ -21,7 +21,7 @@ if messages is None:
 
 # 3. turn attachments into timelines events
 db_dir = app_path + '/storage/processed'
-if config['timelines_events_add_each_id_only_once']:
+if config.get('timelines_events_add_each_id_only_once'):
     processed = Processed('timelines_events', db_dir)
     reader = AttachmentEventsReader(processed)
 else:
@@ -32,8 +32,8 @@ for message in messages:
         reader.add(message, attachment_payload=attachment['payload'])
 
 # 4. deliver events to backend
-backend_module = importlib.import_module(config['backend_module'])
-backend_class = getattr(backend_module, config['backend_class'])
+backend_module = importlib.import_module(config.get('backend_module'))
+backend_class = getattr(backend_module, config.get('backend_class'))
 backend = backend_class()
 for event in reader.events:
     backend.deliver_timelines_event(event)
@@ -41,7 +41,7 @@ for event in reader.events:
         processed.now(event)
 
 # 5. move successfully processed emails to processed folder
-if config['imap_move_processed_messages']:
+if config.get('imap_move_processed_messages'):
     mailbox.move_to_processed_folder(messages)
 
 # 6. disconnect from mailbox

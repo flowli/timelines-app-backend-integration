@@ -11,30 +11,35 @@ class Config:
 
     # returns all config options as a dict. transforms on/off to Python bool.
     def read(self):
-        load_dotenv(self.env_filename)
-        keys_with_defaults = {
-            'imap_host': 'imap.example.com',
-            'imap_username': 'username',
-            'imap_password': 'password',
-            'imap_search_folder': 'INBOX',
-            'imap_move_processed_messages': True,
-            'imap_processed_folder': 'PROCESSED',
-            'imap_cert_allow_other': 'off',
-            'imap_cert_file': '',
-            'imap_key_file': '',
-            'timelines_events_add_each_id_only_once': True,
-            'backend_module': 'lib.backends.printer_example',
-            'backend_class': 'PrinterExample',
+        config_defaults = {
+            'IMAP_HOST': 'imap.example.com',
+            'IMAP_USERNAME': 'username',
+            'IMAP_PASSWORD': 'password',
+            'IMAP_SEARCH_FOLDER': 'INBOX',
+            'IMAP_MOVE_PROCESSED_MESSAGES': True,
+            'IMAP_PROCESSED_FOLDER': 'PROCESSED',
+            'IMAP_CERT_ALLOW_OTHER': 'off',
+            'IMAP_CERT_FILE': '',
+            'IMAP_KEY_FILE': '',
+            'TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE': True,
+            'BACKEND_MODULE': 'lib.backends.printer_example',
+            'BACKEND_CLASS': 'PrinterExample',
         }
+
+        # make .env override environment variables
+        load_dotenv(self.env_filename)
+
+        # write environment variables to config (use defaults if not env var is not set)
         config = {}
-        # assign
-        for key, defaultValue in keys_with_defaults.items():
-            config[key] = os.getenv(key.upper()) or defaultValue
+        env_vars = os.environ
+        for env_key, env_val in env_vars.items():
+            config[env_key] = env_vars[env_key] or config_defaults[env_key]
+
         # transform data types as expected by consumers
-        config['imap_cert_allow_other'] = config['imap_cert_allow_other'].lower()
-        config['imap_move_processed_messages'] = Config.on_off_to_bool(config['imap_move_processed_messages'])
-        config['timelines_events_add_each_id_only_once'] = Config.on_off_to_bool(
-            config['timelines_events_add_each_id_only_once'])
+        config['IMAP_CERT_ALLOW_OTHER'] = config['IMAP_CERT_ALLOW_OTHER'].lower()
+        config['IMAP_MOVE_PROCESSED_MESSAGES'] = Config.on_off_to_bool(config['IMAP_MOVE_PROCESSED_MESSAGES'])
+        config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
+            config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'])
 
         # provide the config dict
         return config
@@ -43,8 +48,8 @@ class Config:
     def get(self, key):
         if self.read_cache is None:
             self.read_cache = self.read()
-        if self.read_cache[key.lower()] is not None:
-            return self.read_cache[key.lower()]
+        if self.read_cache[key.upper()] is not None:
+            return self.read_cache[key.upper()]
         else:
             return os.getenv(key.upper())
 
