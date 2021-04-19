@@ -22,7 +22,7 @@ class AttachmentEventsReader:
             event.user = message['from']
             event.timeline = row[0]
             event.start = row[1]
-            event.stop = row[2]
+            event.duration = row[3]
             event.title = row[4]
             event.note = row[5]
             processed_marking_active = self.processed is not None

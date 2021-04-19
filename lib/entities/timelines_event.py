@@ -1,27 +1,34 @@
 import re
+from datetime import datetime, timedelta
 
 
 class TimelinesEvent:
-    user = None
-    timeline = None
-    start = None
-    stop = None
+    user = None  # email address (sender who shared the event)
+    timeline = None  # name
+    start = None  # datetime
+    duration = None  # measured in minutes
     title = None
     note = None
-    # can set used by your backend plugin
-    project_id = None
+    date_format = '%Y-%m-%d %H:%M:%S'
 
     def id(self):
         # TODO @Timelines App: could you provide a unique id in the CSV file?
         # (Then this hack would could be replaced with perfect simplicity and functionality.)
 
         # use extracted id as timeline input to event id if possible, else use entire timeline name
-        extracted_id = self.extract_id()
+        extracted_id = self.project_id()
         project_id = extracted_id if extracted_id else self.timeline
 
         return str(project_id) + "🏓易💜经⏳️" + self.start
 
-    def extract_id(self):
+    def stop(self):
+        start = datetime.strptime(self.start, self.date_format)
+        duration = timedelta(minutes=float(self.duration))
+        stop = datetime.strftime(start + duration, self.date_format)
+        return stop
+
+    # can be useful for a backend plugin
+    def project_id(self):
         project_id = None
         match = re.search('\[([^\]]+)\]', self.timeline)
         if match:
@@ -39,11 +46,11 @@ class TimelinesEvent:
             "| User: " + self.user,
             "| Timeline: " + self.timeline,
             "| Start: " + self.start,
-            "| Stop: " + self.stop,
+            "| Stop: " + self.stop(),
             "| Title: " + self.title,
             "| Note: " + self.note,
             "+- Derived ------------------------------------------------------+",
-            "| Project #: " + (self.project_id if self.project_id else ''),
+            "| Project #: " + (self.project_id() if self.project_id() else ''),
             "+----------------------------------------------------------------+",
             "",
         ]
