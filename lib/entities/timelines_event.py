@@ -4,11 +4,11 @@ from datetime import datetime, timedelta
 
 class TimelinesEvent:
     user = None  # email address (sender who shared the event)
-    timeline = None  # name
-    start = None  # datetime
-    duration = None  # measured in minutes
-    title = None
-    note = None
+    timeline = None  # timeline name
+    start = None  # event start, datetime
+    duration = None  # event duration, measured in minutes
+    title = None  # event title
+    note = None  # event note
     date_format = '%Y-%m-%d %H:%M:%S'
 
     def id(self):
