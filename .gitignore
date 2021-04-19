@@ -4,3 +4,4 @@
 /ssl/
 /.idea/
 **/__pycache__/
+/upgrade.sh
