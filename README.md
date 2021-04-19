@@ -19,7 +19,7 @@ see [LICENSE.md](LICENSE.md)
 
 ## User Guide
 ### Caveats
-1. This tool identifies time spans using their timeline name and the starting time. So whenever one or both of the two change it counts as a new event and gets re-imported. This could be fixed by Timelines App providing a unique identifier for events in the CSV data and this tool using that is the new identifier.
+1. This tool identifies time spans using their timeline name and the starting time. So whenever one or both of the two change it counts as a new event and gets re-imported. This could be fixed by Timelines App providing a unique identifier for events in the CSV data and this tool using that as the new identifier.
 2. The *project identifier* needs to be *manually encoded by the Timelines user* (either in the *Timeline* or the *Event*) to be able to automatically extract it and forward it to your backend. A simple way is to add `#<your company's project id>` to the Timeline name and using a regexp matching in your backend plugin.
 
 ### Installation
