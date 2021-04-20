@@ -1,4 +1,4 @@
-# Timelines App Backend Integration
+# Timelines App: Backend Integration
 
 ## License
 see [LICENSE.md](LICENSE.md)
