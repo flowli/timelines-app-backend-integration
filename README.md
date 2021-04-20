@@ -1,8 +1,5 @@
 # Timelines App: Backend Integration
 
-## License
-see [LICENSE.md](LICENSE.md)
-
 ## Technical Concept
 
 *TL;DR: [Timelines App](https://timelines.app) 👉 Share detailed CSV via E-Mail 👉 Collect using IMAP 👉 Deliver time spans to your backend*
