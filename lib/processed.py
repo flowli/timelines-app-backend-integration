@@ -11,7 +11,9 @@ class Processed:
         self.db = pickledb.load(db_file, True)
 
     def now(self, entity):
-        self.db.set(self.entity_name + "=" + str(entity.id()), True)
+        entity_id = entity.id()
+        if entity_id is not None:
+            self.db.set(self.entity_name + "=" + str(entity.id()), True)
 
     def has_been(self, entity):
         return not self.not_yet(entity)
