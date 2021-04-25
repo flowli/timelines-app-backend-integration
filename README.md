@@ -17,7 +17,7 @@
 ## User Guide
 ### Caveats
 1. This tool identifies time spans using their timeline name and the starting time. So whenever one or both of the two change it counts as a new event and gets re-imported. This could be fixed by Timelines App providing a unique identifier for events in the CSV data and this tool using that as the new identifier.
-2. The *project identifier* needs to be part of the Timeline name like `Project XYZ [123] …`.
+2. The *project identifier* needs to be part of the Timeline name like `Project XYZ [123] …`. This could be automated if the Timelines app supported syncing project metadata with a backend.
 
 ### Installation
 1. Ensure python3 is installed
