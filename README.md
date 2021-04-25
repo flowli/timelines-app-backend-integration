@@ -1,5 +1,7 @@
 # Timelines App: Backend Integration
 
+by [Florian Arndt](https://arweb.de)
+
 ## Technical Concept
 
 *TL;DR: [Timelines App](https://timelines.app) 👉 Share detailed CSV via E-Mail 👉 Collect using IMAP 👉 Deliver time spans to your backend*
