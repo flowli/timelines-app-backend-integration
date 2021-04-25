@@ -1,6 +1,6 @@
 # Timelines App: Backend Integration
 
-Started in 2021 by [Florian Arndt](https://arweb.de/imprint/) with 💜 for 🕰
+Started in 2021 by [Florian Arndt](https://arweb.de/imprint/) out of 💜 for 🕰.
 
 ## Technical Concept
 
