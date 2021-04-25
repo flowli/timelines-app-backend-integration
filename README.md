@@ -11,13 +11,13 @@
 2. With this mechanism this integration can automatically determine important fields of tracked time spans:
     - The user can be identified by the e-mail's sender address
     - [Not coded yet] security can be enhanced with a required, short smtp relaying path, e-mail encryption or a simple passphrase somewhere in e-mails can be required for each user
-    - The project identifier can be encoded in the timeline name (using square brackets like `[backend project id]`) and then used to match the project in your backend
-3. [Not coded yet] Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
+    - The project identifier can be encoded in the timeline name (using square brackets like `[backend project id]`). This identifier can then be used to match the project in your backend.
+3. [Not implemented yet] Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
 
 ## User Guide
 ### Caveats
 1. This tool identifies time spans using their timeline name and the starting time. So whenever one or both of the two change it counts as a new event and gets re-imported. This could be fixed by Timelines App providing a unique identifier for events in the CSV data and this tool using that as the new identifier.
-2. The *project identifier* needs to be *manually encoded by the Timelines user* (either in the *Timeline* or the *Event*) to be able to automatically extract it and forward it to your backend. A simple way is to add `#<your company's project id>` to the Timeline name and using a regexp matching in your backend plugin.
+2. The *project identifier* needs to be part of the Timeline name with `Project XYZ [123] …`.
 
 ### Installation
 1. Ensure python3 is installed
