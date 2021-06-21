@@ -64,7 +64,7 @@ class Mailbox:
                                                              attachment_suffix_filter=attachment_suffix_filter)
             if attachment_suffix_filter is None or len(message['attachments']) > 0:
                 messages.append(message)
-            return messages
+        return messages
 
     def close(self):
         self.client.shutdown()
