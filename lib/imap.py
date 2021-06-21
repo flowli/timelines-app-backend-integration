@@ -1,5 +1,7 @@
-from imapclient import IMAPClient
 import ssl
+
+from imapclient import IMAPClient
+
 from .email_parser import EMailParser
 
 
