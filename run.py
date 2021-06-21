@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
+import importlib
 import os
 import sys
-import importlib
+
+from lib.attachment_events_reader import AttachmentEventsReader
 from lib.config import Config
 from lib.imap import Mailbox
-from lib.attachment_events_reader import AttachmentEventsReader
 from lib.processed import Processed
 
 app_path = os.path.dirname(os.path.realpath(__file__))

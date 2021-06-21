@@ -1,6 +1,7 @@
-import unittest
-from lib.config import Config
 import os
+import unittest
+
+from lib.config import Config
 
 this_dir = os.path.dirname(os.path.realpath(__file__))
 
