@@ -31,35 +31,29 @@ class TimelinesEvent:
 
     # can be useful for a backend plugin
     def project_id(self):
-        project_id = None
         matches = re.findall('\[([^\]]+)\]', self.timeline)
-        if len(matches) >= 1:
-            return matches[0]
-        return None
+        return matches[0] if len(matches) >= 1 else None
 
+    def __eq__(self, other):
+        return self.id() == other.id()
 
-def __eq__(self, other):
-    return self.id() == other.id()
+    def __str__(self):
+        return self.__repr__()
 
-
-def __str__(self):
-    return self.__repr__()
-
-
-def __repr__(self):
-    lines = [
-        "+- Provided by Timelines Event ----------------------------------+",
-        "| User: " + self.user,
-        "| Timeline: " + self.timeline,
-        "| Start: " + self.start,
-        "| Stop: " + self.stop(),
-        "| Title: " + self.title,
-        "| Note: " + self.note,
-    ]
-    project_id = self.project_id()
-    if project_id is not None:
-        lines.append("+- Derived ------------------------------------------------------+")
-        lines.append("| Project #: " + project_id)
-        lines.append("+----------------------------------------------------------------+")
-    lines.append("")
-    return "\n".join(lines)
+    def __repr__(self):
+        lines = [
+            "+- Provided by Timelines Event ----------------------------------+",
+            "| User: " + self.user,
+            "| Timeline: " + self.timeline,
+            "| Start: " + self.start,
+            "| Stop: " + self.stop(),
+            "| Title: " + self.title,
+            "| Note: " + self.note,
+        ]
+        project_id = self.project_id()
+        if project_id is not None:
+            lines.append("+- Derived ------------------------------------------------------+")
+            lines.append("| Project #: " + project_id)
+            lines.append("+----------------------------------------------------------------+")
+        lines.append("")
+        return "\n".join(lines)
