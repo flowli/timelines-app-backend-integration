@@ -25,7 +25,7 @@ class AttachmentEventsReader:
             event.start = row[1]
             event.duration = row[3]
             event.title = row[4]
-            event.note = row[5]
+            event.note = row[5] if len(row) > 5 else ''
             processed_marking_active = self.processed is not None
             if processed_marking_active:
                 if self.processed.not_yet(event):
