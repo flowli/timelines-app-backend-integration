@@ -5,3 +5,4 @@
 /.idea/
 **/__pycache__/
 /upgrade.sh
+/cron.sh
