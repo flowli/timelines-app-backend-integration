@@ -30,7 +30,10 @@ else:
     reader = AttachmentEventsReader()
 for message in messages:
     for attachment in message['attachments']:
-        reader.add(message, attachment_payload=attachment['payload'])
+        try:
+            reader.add(message, attachment_payload=attachment['payload'])
+        except Exception:
+            pass
 
 # 4. deliver events to backend
 backend_module = importlib.import_module(config.get('backend_module'))
