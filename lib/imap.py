@@ -25,17 +25,6 @@ class Mailbox:
         ssl_context = ssl.create_default_context()
         ssl_context.check_hostname = True
         ssl_context.verify_mode = ssl.CERT_REQUIRED
-
-        # Allow own certificate if configured
-        if self.config.get('imap_cert_allow_other') == 'on':
-            # other certificate is to be allowed
-            if self.config.get('imap_key_file') == '':
-                # a certificate with integrated key is provided
-                ssl_context.load_cert_chain(certfile=self.config.get('imap_cert_file'))
-            else:
-                # a separate key file is provided
-                ssl_context.load_cert_chain(certfile=self.config.get('imap_cert_file'),
-                                            keyfile=self.config.get('imap_key_file'))
         return ssl_context
 
     def move_to_processed_folder(self, messages):

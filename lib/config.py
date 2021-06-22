@@ -14,17 +14,18 @@ class Config:
     def read(self):
         config_defaults = {
             'IMAP_HOST': 'imap.example.com',
-            'IMAP_USERNAME': 'username',
-            'IMAP_PASSWORD': 'password',
+            'IMAP_USERNAME': 'imap-username',
+            'IMAP_PASSWORD': 'imap-password',
             'IMAP_SEARCH_FOLDER': 'INBOX',
             'IMAP_MOVE_PROCESSED_MESSAGES': True,
             'IMAP_PROCESSED_FOLDER': 'PROCESSED',
-            'IMAP_CERT_ALLOW_OTHER': 'off',
-            'IMAP_CERT_FILE': '',
-            'IMAP_KEY_FILE': '',
             'TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE': True,
             'BACKEND_MODULE': 'lib.backends.printer_example',
             'BACKEND_CLASS': 'PrinterExample',
+            'SMTP_HOST': 'smtp.example.com',
+            'SMTP_USERNAME': 'smtp-username',
+            'SMTP_PASSWORD': 'smtp-password',
+            'ENABLE_RECEIPTS_TO_SENDER': False
         }
 
         # make .env override environment variables
@@ -37,7 +38,6 @@ class Config:
             config[env_key] = env_vars[env_key] or config_defaults[env_key]
 
         # transform data types as expected by consumers
-        config['IMAP_CERT_ALLOW_OTHER'] = config['IMAP_CERT_ALLOW_OTHER'].lower()
         config['IMAP_MOVE_PROCESSED_MESSAGES'] = Config.on_off_to_bool(config['IMAP_MOVE_PROCESSED_MESSAGES'])
         config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
             config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'])
