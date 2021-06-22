@@ -19,8 +19,8 @@ class AttachmentEventsReader:
             i = i + 1
             if i == 1:  # skip header row
                 continue
-            if len(row) < 6:
-                raise Exception('CSV input has less ' + str(len(row)) + ' columns, at least 6 were expected')
+            if len(row) < 6:  # skip rows with less than 6 columns
+                raise Exception('CSV has only ' + str(len(row)) + ' columns, 6 expected')
             event = TimelinesEvent()
             event.user = message['from']
             event.timeline = row[0]
