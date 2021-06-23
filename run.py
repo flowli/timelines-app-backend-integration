@@ -28,23 +28,27 @@ db_dir = app_path + '/storage/processed'
 #    reader = AttachmentEventsReader(processed)
 # else:
 processed = None
-reader = AttachmentEventsReader()
 
-for message in messages:
-    for attachment in message['attachments']:
-        try:
-            reader.add(message, attachment_payload=attachment['payload'])
-        except Exception:
-            pass
-
-# 4. deliver events to backend
+# 4. process messages
 backend_module = importlib.import_module(config.get('backend_module'))
 backend_class = getattr(backend_module, config.get('backend_class'))
 backend = backend_class()
-for event in reader.events:
-    backend.deliver_timelines_event(event)
-#    if processed is not None:
-#        processed.now(event)
+for message in messages:
+    # try:
+    reader = AttachmentEventsReader()
+    # read all relevant attachments
+    for attachment in message['attachments']:
+        reader.add(message, attachment_payload=attachment['payload'])
+    # deliver events to backend
+    for event in reader.events:
+        backend.deliver_timelines_event(event)
+        # if processed is not None:
+        #     processed.now(event)
+    # send configured receipts
+    if config.get('receipt_to_sender') or config.get('receipt_copy_to_addresses') != '':
+        receipts(config).send(message, reader.events)
+    # except Exception:
+    #    pass
 
 # 5. move successfully processed emails to processed folder
 if config.get('imap_move_processed_messages'):
@@ -52,7 +56,3 @@ if config.get('imap_move_processed_messages'):
 
 # 6. disconnect from mailbox
 mailbox.close()
-
-# 7. send report (if the feature is enabled)
-if config.get('receipt_to_sender') or config.get('receipt_copy_to_addresses') != '':
-    receipts(config).send(messages, config.get('receipt_to_sender'), config.get('receipt_copy_to_addresses'))

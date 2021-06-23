@@ -1,4 +1,6 @@
 import smtplib
+from email.header import Header
+from email.mime.text import MIMEText
 
 
 class smtp:
@@ -13,10 +15,9 @@ class smtp:
     def __del__(self):
         self.server.quit()
 
-    def send(self, sender, recipients, subject, messageText):
-        recipient_list = recipients.split()
-        message = '''Subject: {subject}
-
-{messageText}
-'''.format(subject=subject, messageText=messageText)
-        self.server.sendmail(sender, recipient_list, message)
+    def send(self, mail_sender, recipients, subject, messageText):
+        mail_recipients = recipients.split()
+        mail_message = MIMEText(messageText.encode('utf8'), _charset="UTF-8")
+        mail_message['From'] = mail_sender
+        mail_message['Subject'] = Header(subject, "utf-8")
+        self.server.sendmail(mail_sender, mail_recipients, mail_message.as_string())

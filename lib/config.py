@@ -51,7 +51,6 @@ class Config:
         config['RECEIPT_TO_SENDER'] = Config.on_off_to_bool(config['RECEIPT_TO_SENDER'])
         config['RECEIPT_COPY_TO_ADDRESSES'] = config['RECEIPT_COPY_TO_ADDRESSES'].strip()
         config['RECEIPT_SENDER_ADDRESS'] = config['RECEIPT_SENDER_ADDRESS'].strip()
-
         # config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
         #    config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'])
 
