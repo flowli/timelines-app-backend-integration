@@ -54,6 +54,5 @@ if config.get('imap_move_processed_messages'):
 mailbox.close()
 
 # 7. send report (if the feature is enabled)
-
 if config.get('receipt_to_sender') or config.get('receipt_copy_to_addresses') != '':
     receipts(config).send(messages, config.get('receipt_to_sender'), config.get('receipt_copy_to_addresses'))

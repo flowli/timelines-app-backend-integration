@@ -13,7 +13,7 @@ class smtp:
     def __del__(self):
         self.server.quit()
 
-    def send(self, recipients, subject, messageText, sender=None):
+    def send(self, sender, recipients, subject, messageText):
         recipient_list = recipients.split()
         message = '''Subject: {subject}
 

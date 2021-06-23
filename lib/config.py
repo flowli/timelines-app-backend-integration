@@ -26,6 +26,7 @@ class Config:
             'SMTP_USERNAME': 'smtp-username',
             'SMTP_PASSWORD': 'smtp-password',
             'RECEIPT_TO_SENDER': False,
+            'RECEIPT_SENDER_ADDRESS': 'timelines@example.com',
             'RECEIPT_COPY_TO_ADDRESSES': ''
         }
 
@@ -35,13 +36,21 @@ class Config:
         # write environment variables to config (use defaults if not env var is not set)
         config = {}
         env_vars = os.environ
+
+        # add all env values to config
         for env_key, env_val in env_vars.items():
             config[env_key] = env_vars[env_key] or config_defaults[env_key]
+
+        # add defaults for keys which were not in env
+        for default_key in config_defaults:
+            if config.get(default_key) is None:
+                config[default_key] = config_defaults[default_key]
 
         # transform data types as expected by consumers
         config['IMAP_MOVE_PROCESSED_MESSAGES'] = Config.on_off_to_bool(config['IMAP_MOVE_PROCESSED_MESSAGES'])
         config['RECEIPT_TO_SENDER'] = Config.on_off_to_bool(config['RECEIPT_TO_SENDER'])
         config['RECEIPT_COPY_TO_ADDRESSES'] = config['RECEIPT_COPY_TO_ADDRESSES'].strip()
+        config['RECEIPT_SENDER_ADDRESS'] = config['RECEIPT_SENDER_ADDRESS'].strip()
 
         # config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
         #    config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'])
