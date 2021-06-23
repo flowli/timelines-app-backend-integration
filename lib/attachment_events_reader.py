@@ -6,7 +6,7 @@ from lib.entities.timelines_event import TimelinesEvent
 
 class AttachmentEventsReader:
     processed = None
-    events: list[TimelinesEvent] = []
+    events = []
 
     def __init__(self, processed=None):
         self.processed = processed
