@@ -39,8 +39,13 @@ class TimelinesEvent:
         return self.id() == other.id()
 
     def __str__(self):
-        lines = ["+- Timelines Event ----------------------------------+", "| User: " + self.user,
-                 "| Timeline: " + self.timeline, "| Start: " + self.start, "| Stop: " + self.stop(),
-                 "| Title: " + self.title, "| Note: " + self.note, "| Project #: " + self.project_id(),
+        lines = ["+- Timelines Event:",
+                 "| User:            " + self.user,
+                 "| Timeline:        " + self.timeline,
+                 "| Start:           " + self.start,
+                 "| Stop:            " + self.stop(),
+                 "| Title:           " + self.title,
+                 "| Note:            " + self.note,
+                 "| Project #:       " + self.project_id(),
                  "| Delivery status:\n" + "\n".join(self.delivery_status_lines), ""]
         return "\n".join(lines)
