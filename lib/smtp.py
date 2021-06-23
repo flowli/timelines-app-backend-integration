@@ -4,19 +4,19 @@ import smtplib
 class smtp:
     server = None
 
-    def __init__(self):
-        self.server = smtplib.SMTP('localhost')
-        self.server.set_debuglevel(1)
+    # set debug_level to 1 to see more
+    def __init__(self, config, debug_level=0):
+        self.server = smtplib.SMTP_SSL(config.get('smtp_host'))
+        self.server.set_debuglevel(debug_level)
+        self.server.login(config.get('smtp_username'), config.get('smtp_password'))
 
     def __del__(self):
         self.server.quit()
 
-    def send(self, sender, recipients, subject, messageText):
+    def send(self, recipients, subject, messageText, sender=None):
         recipient_list = recipients.split()
-        message = '''
-            Subject: {subject}
-    
-            {messageText}
-            '''.format(subject=subject, messageText=messageText)
-        self.server.sendmail(sender, recipient_list, messageText)
-        return
+        message = '''Subject: {subject}
+
+{messageText}
+'''.format(subject=subject, messageText=messageText)
+        self.server.sendmail(sender, recipient_list, message)

@@ -19,7 +19,7 @@ class Config:
             'IMAP_SEARCH_FOLDER': 'INBOX',
             'IMAP_MOVE_PROCESSED_MESSAGES': True,
             'IMAP_PROCESSED_FOLDER': 'PROCESSED',
-            #'TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE': True,
+            # 'TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE': True,
             'BACKEND_MODULE': 'lib.backends.printer_example',
             'BACKEND_CLASS': 'PrinterExample',
             'SMTP_HOST': 'smtp.example.com',
@@ -40,7 +40,10 @@ class Config:
 
         # transform data types as expected by consumers
         config['IMAP_MOVE_PROCESSED_MESSAGES'] = Config.on_off_to_bool(config['IMAP_MOVE_PROCESSED_MESSAGES'])
-        #config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
+        config['RECEIPT_TO_SENDER'] = Config.on_off_to_bool(config['RECEIPT_TO_SENDER'])
+        config['RECEIPT_COPY_TO_ADDRESSES'] = config['RECEIPT_COPY_TO_ADDRESSES'].strip()
+
+        # config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
         #    config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'])
 
         # provide the config dict
