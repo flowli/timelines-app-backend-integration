@@ -1,5 +1,4 @@
 import re
-import string
 from datetime import datetime, timedelta
 
 
@@ -11,7 +10,7 @@ class TimelinesEvent:
     title = None  # event title
     note = None  # event note
     date_format = '%Y-%m-%d %H:%M:%S'
-    delivery_status_lines: list[string] = []  # to be filled by a backend plugin
+    delivery_status_lines: None  # list of strings, to be set by your backend plugin
 
     def id(self):
         # TODO @Timelines App: could you provide a unique id in the CSV file?
