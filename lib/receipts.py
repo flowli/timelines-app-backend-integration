@@ -1,4 +1,3 @@
-from lib.entities.timelines_event import TimelinesEvent
 from lib.smtp import smtp
 
 
@@ -10,7 +9,7 @@ class receipts:
         self.config = config
         self.smtp = smtp(config)
 
-    def send(self, message, events: list[TimelinesEvent]):
+    def send(self, message, events):
         receipt_to_sender = self.config.get('receipt_to_sender')
         receipt_copy_to_addresses = self.config.get('receipt_copy_to_addresses')
         send_any = receipt_to_sender or receipt_copy_to_addresses != ''
