@@ -1,4 +1,5 @@
 import re
+import string
 from datetime import datetime, timedelta
 
 
@@ -10,6 +11,7 @@ class TimelinesEvent:
     title = None  # event title
     note = None  # event note
     date_format = '%Y-%m-%d %H:%M:%S'
+    delivery_status_lines: list[string] = []  # to be filled by a backend plugin
 
     def id(self):
         # TODO @Timelines App: could you provide a unique id in the CSV file?
@@ -40,5 +42,6 @@ class TimelinesEvent:
     def __str__(self):
         lines = ["+- Timelines Event ----------------------------------+", "| User: " + self.user,
                  "| Timeline: " + self.timeline, "| Start: " + self.start, "| Stop: " + self.stop(),
-                 "| Title: " + self.title, "| Note: " + self.note, "| Project #: " + self.project_id(), ""]
+                 "| Title: " + self.title, "| Note: " + self.note, "| Project #: " + self.project_id(),
+                 "| Delivery status:\n" + "\n".join(self.delivery_status_lines), ""]
         return "\n".join(lines)

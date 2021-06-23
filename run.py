@@ -40,8 +40,9 @@ for message in messages:
     for attachment in message['attachments']:
         reader.add(message, attachment_payload=attachment['payload'])
     # deliver events to backend
+    delivery_status_lines_list = []
     for event in reader.events:
-        backend.deliver_timelines_event(event)
+        event.delivery_status_lines = backend.deliver_timelines_event(event)
         # if processed is not None:
         #     processed.now(event)
     # send configured receipts
