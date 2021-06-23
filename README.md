@@ -43,8 +43,8 @@ spans to your backend*
 ### Configuration
 
 1. Set environment variables. You can:
-    - set environment variables (see `.env.example` for a list) in your machine or container
-    - copy `.env.example` to `.env` and customize it to your needs
+    - set environment variables (see `example.env` for a list) in your machine or container
+    - copy `example.env` to `.env` and customize it to your needs
     - it's likely wise to make sure your imap server has a valid certificate
     - feel encouraged to write your own backend plugin - check out printer_example.py for a trivial example
 

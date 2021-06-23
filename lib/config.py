@@ -19,13 +19,14 @@ class Config:
             'IMAP_SEARCH_FOLDER': 'INBOX',
             'IMAP_MOVE_PROCESSED_MESSAGES': True,
             'IMAP_PROCESSED_FOLDER': 'PROCESSED',
-            'TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE': True,
+            #'TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE': True,
             'BACKEND_MODULE': 'lib.backends.printer_example',
             'BACKEND_CLASS': 'PrinterExample',
             'SMTP_HOST': 'smtp.example.com',
             'SMTP_USERNAME': 'smtp-username',
             'SMTP_PASSWORD': 'smtp-password',
-            'ENABLE_RECEIPTS_TO_SENDER': False
+            'RECEIPT_TO_SENDER': False,
+            'RECEIPT_COPY_TO_ADDRESSES': ''
         }
 
         # make .env override environment variables
@@ -39,8 +40,8 @@ class Config:
 
         # transform data types as expected by consumers
         config['IMAP_MOVE_PROCESSED_MESSAGES'] = Config.on_off_to_bool(config['IMAP_MOVE_PROCESSED_MESSAGES'])
-        config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
-            config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'])
+        #config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'] = Config.on_off_to_bool(
+        #    config['TIMELINES_EVENTS_ADD_EACH_ID_ONLY_ONCE'])
 
         # provide the config dict
         return config

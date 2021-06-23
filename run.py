@@ -8,6 +8,7 @@ from lib.attachment_events_reader import AttachmentEventsReader
 from lib.config import Config
 from lib.imap import Mailbox
 from lib.processed import Processed
+from lib.receipts import receipts
 
 app_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -22,12 +23,13 @@ if messages is None:
 
 # 3. turn attachments into timelines events
 db_dir = app_path + '/storage/processed'
-if config.get('timelines_events_add_each_id_only_once'):
-    processed = Processed('timelines_events', db_dir)
-    reader = AttachmentEventsReader(processed)
-else:
-    processed = None
-    reader = AttachmentEventsReader()
+#if config.get('timelines_events_add_each_id_only_once'):
+#    processed = Processed('timelines_events', db_dir)
+#    reader = AttachmentEventsReader(processed)
+#else:
+processed = None
+reader = AttachmentEventsReader()
+
 for message in messages:
     for attachment in message['attachments']:
         try:
@@ -41,8 +43,8 @@ backend_class = getattr(backend_module, config.get('backend_class'))
 backend = backend_class()
 for event in reader.events:
     backend.deliver_timelines_event(event)
-    if processed is not None:
-        processed.now(event)
+#    if processed is not None:
+#        processed.now(event)
 
 # 5. move successfully processed emails to processed folder
 if config.get('imap_move_processed_messages'):
@@ -50,3 +52,8 @@ if config.get('imap_move_processed_messages'):
 
 # 6. disconnect from mailbox
 mailbox.close()
+
+# 7. send report (if the feature is enabled)
+if config.get('receipt_to_sender') or config.get('receipt_copy_to_addresses'):
+    r = receipts()
+    r.send(messages, config.get('receipt_to_sender'), config.get('receipt_copy_to_addresses'))

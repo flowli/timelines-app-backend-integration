@@ -29,7 +29,7 @@ class TimelinesEvent:
         stop = datetime.strftime(start + duration, self.date_format)
         return stop
 
-    # can be useful for a backend plugin
+    # required by most backend plugins
     def project_id(self):
         matches = re.findall('\[([^\]]+)\]', self.timeline)
         return matches[0] if len(matches) >= 1 else None
