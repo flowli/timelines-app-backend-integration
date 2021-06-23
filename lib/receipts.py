@@ -25,9 +25,7 @@ class receipts:
         sender_address = self.config.get('receipt_sender_address')
         if receipt_to_sender:
             subject = '[Timelines Receipt] ' + message['subject']
-            print('Sending receipt "' + subject + ' to ' + message['from'])
             self.smtp.send(sender_address, message['from'], subject, message_text)
         if receipt_copy_to_addresses != '':
             subject = '[Copy of Timlines Receipt for ' + message['from'] + '] ' + message['subject']
-            print('Sending receipt "' + subject + ' to ' + receipt_copy_to_addresses)
             self.smtp.send(sender_address, receipt_copy_to_addresses, subject, message_text)
