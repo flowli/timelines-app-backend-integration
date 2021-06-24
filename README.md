@@ -20,8 +20,8 @@ spans to your backend*
           passphrase somewhere in e-mails can be required for each user
         - The project identifier can be encoded in the timeline name (using square brackets like `[backend project id]`).
           This identifier can then be used to match the project in your backend.
-3. **Get Receipts** Any user who reported his time can be informed about the state and stats of the import process
-   via a report e-mail
+3. **Get Receipts**
+    - Any user who reported his time can be informed about the state and stats of the import process via a report e-mail
 
 ## User Guide
 
