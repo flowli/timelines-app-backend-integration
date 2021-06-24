@@ -13,13 +13,14 @@ spans to your backend*
       user)
     - That CSV format can - at any point in time - be manually shared to an e-mail address. This should be done before
       reasonable invoicing can take place.
-2. **Deliver tracked time to your backend** With this mechanism this integration can automatically determine important fields of tracked time spans:
-    - The user can be identified by the e-mail's sender address
-    - [Not coded yet] security can be enhanced with a required, short smtp relaying path, e-mail encryption or a simple
-      passphrase somewhere in e-mails can be required for each user
-    - The project identifier can be encoded in the timeline name (using square brackets like `[backend project id]`).
-      This identifier can then be used to match the project in your backend.
-3. **Receipts** Any user who reported his time can be informed about the state and stats of the import process
+2. **Deliver tracked time to your backend**
+    - With the aforementioned mechanism this integration can automatically determine important fields of tracked time spans:
+        - The user can be identified by the e-mail's sender address
+        - [Not coded yet] security can be enhanced with a required, short smtp relaying path, e-mail encryption or a simple
+          passphrase somewhere in e-mails can be required for each user
+        - The project identifier can be encoded in the timeline name (using square brackets like `[backend project id]`).
+          This identifier can then be used to match the project in your backend.
+3. **Get Receipts** Any user who reported his time can be informed about the state and stats of the import process
    via a report e-mail
 
 ## User Guide
