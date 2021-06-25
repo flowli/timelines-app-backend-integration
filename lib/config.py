@@ -67,4 +67,4 @@ class Config:
             return os.getenv(key.upper())
 
     def on_off_to_bool(string):
-        return string.lower() != 'off'
+        return str(string).lower() != 'off'
