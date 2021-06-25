@@ -8,6 +8,7 @@ from lib.attachment_events_reader import AttachmentEventsReader
 from lib.config import Config
 from lib.imap import Mailbox
 # from lib.processed import Processed
+from lib.processed import Processed
 from lib.receipts import receipts
 
 app_path = os.path.dirname(os.path.realpath(__file__))
@@ -23,11 +24,11 @@ if messages is None:
 
 # 3. turn attachments into timelines events
 db_dir = app_path + '/storage/processed'
-# if config.get('timelines_events_add_each_id_only_once'):
-#    processed = Processed('timelines_events', db_dir)
-#    reader = AttachmentEventsReader(processed)
-# else:
-processed = None
+if config.get('timelines_events_duplicate_detection'):
+    processed = Processed('timelines_events', db_dir)
+    reader = AttachmentEventsReader(processed)
+else:
+    processed = None
 
 # 4. process messages
 backend_module = importlib.import_module(config.get('backend_module'))
