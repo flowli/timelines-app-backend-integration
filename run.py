@@ -43,14 +43,14 @@ for message in messages:
     # deliver events to backend
     delivery_status_lines_list = []
     for event in reader.events:
-        event.delivery_status_lines = backend.deliver_timelines_event(event)
-        # if processed is not None:
-        #     processed.now(event)
+        project_id = event.project_id()
+        if project_id is not None and project_id != '':
+            event.delivery_status_lines = backend.deliver_timelines_event(event)
+        if processed is not None:
+            processed.now(event)
     # send configured receipts
     if config.get('receipt_to_sender') or config.get('receipt_copy_to_addresses') != '':
         receipts(config).send(message, reader.events)
-    # except Exception:
-    #    pass
 
 # 5. move successfully processed emails to processed folder
 if config.get('imap_move_processed_messages'):

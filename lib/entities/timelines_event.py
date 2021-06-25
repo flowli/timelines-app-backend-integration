@@ -3,14 +3,18 @@ from datetime import datetime, timedelta
 
 
 class TimelinesEvent:
+    date_format = '%Y-%m-%d %H:%M:%S'
+
     user = None  # email address (sender who shared the event)
     timeline = None  # timeline name
     start = None  # event start, datetime
     duration = None  # event duration, measured in minutes
     title = None  # event title
     note = None  # event note
-    date_format = '%Y-%m-%d %H:%M:%S'
     delivery_status_lines: None  # list of strings, to be set by your backend plugin
+
+    def __init__(self):
+        self.delivery_status_lines = []
 
     def id(self):
         # TODO @Timelines App: could you provide a unique id in the CSV file?
@@ -33,7 +37,7 @@ class TimelinesEvent:
     # required by most backend plugins
     def project_id(self):
         matches = re.findall('\[([^\]]+)\]', self.timeline)
-        return matches[0] if len(matches) >= 1 else None
+        return matches[0] if len(matches) >= 1 else ''
 
     def __eq__(self, other):
         return self.id() == other.id()
