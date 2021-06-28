@@ -1,3 +1,5 @@
+from html import escape
+
 from lib.smtp import smtp
 
 
@@ -16,15 +18,47 @@ class receipts:
         if not send_any:
             return
 
-        lines = []
+        text = []
+        html = [
+            '<table>',
+            '<tr>',
+            '<th>Timeline</th>',
+            '<th>Start</th>',
+            '<th>Duration</th>',
+            '<th>Title</th>',
+            '<th>Note</th>',
+            '<th>Status</th>',
+            '</tr>'
+        ]
+        hours_total = 0
         for event in events:
-            lines.append(str(event) + "\n")
+            text.append(str(event) + "\n")
+            html.append('<tr>')
+            html.append('<td>' + escape(event.timeline) + '</td>')
+            html.append('<td>' + escape(event.start) + '</td>')
+            hours = float(event.duration) / 60
+            hours_total += hours
+            html.append('<td align="right">' + escape(str(round(hours * 100) / 100)) + 'h</td>')
+            html.append('<td>' + escape(event.title) + '</td>')
+            html.append('<td>' + escape(event.note) + '</td>')
+            html.append('<td>' + escape("<br/>".join(event.delivery_status_lines)) + '</td>')
+            html.append('</tr>')
+        html.append("".join([
+            '<tr>',
+            '<th></th>',
+            '<th></th>',
+            '<th align="right">' + escape(str(round(hours_total * 100) / 100)) + 'h</th>',
+            '<th></th>',
+            '<th></th>',
+            '<th></th>',
+            '</tr>'
+        ]));
+        html.append('</table>')
 
-        message_text = "\n".join(lines)
         sender_address = self.config.get('receipt_sender_address')
         if receipt_to_sender:
             subject = '[Timelines Receipt] ' + message['subject']
-            self.smtp.send(sender_address, message['from'], subject, message_text)
+            self.smtp.send(sender_address, message['from'], subject, "\n".join(text), "".join(html))
         if receipt_copy_to_addresses != '':
             subject = '[Copy of Timlines Receipt for ' + message['from'] + '] ' + message['subject']
-            self.smtp.send(sender_address, receipt_copy_to_addresses, subject, message_text)
+            self.smtp.send(sender_address, receipt_copy_to_addresses, subject, "\n".join(text), "".join(html))
