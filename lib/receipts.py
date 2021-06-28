@@ -41,7 +41,8 @@ class receipts:
             html.append('<td align="right">' + escape(str(round(hours * 100) / 100)) + 'h</td>')
             html.append('<td>' + escape(event.title) + '</td>')
             html.append('<td>' + escape(event.note) + '</td>')
-            html.append('<td>' + escape("<br/>".join(event.delivery_status_lines)) + '</td>')
+            delivery_status_lines = map(escape, event.delivery_status_lines)
+            html.append('<td>' + "<br/>".join(delivery_status_lines) + '</td>')
             html.append('</tr>')
         html.append("".join([
             '<tr>',
