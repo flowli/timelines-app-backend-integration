@@ -26,7 +26,7 @@ class receipts:
 
         text = []
         html = [
-            '<b>Received ' + self.html_hours(hours_total) + ' hours</b>',
+            '<h1>Received a total of ' + self.html_hours(hours_total) + ' hours</h1>',
             '<table>',
             '<tr>',
             '<th>Timeline</th>',
