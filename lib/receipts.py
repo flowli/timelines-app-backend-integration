@@ -18,8 +18,15 @@ class receipts:
         if not send_any:
             return
 
+        # calculate total hours
+        hours_total = 0
+        for event in events:
+            hours = float(event.duration) / 60
+            hours_total += hours
+
         text = []
         html = [
+            '<b>Received ' + hours_total + ' hours</b>',
             '<table>',
             '<tr>',
             '<th>Timeline</th>',
@@ -30,15 +37,13 @@ class receipts:
             '<th>Status</th>',
             '</tr>'
         ]
-        hours_total = 0
         for event in events:
             text.append(str(event) + "\n")
             html.append('<tr>')
             html.append('<td>' + escape(event.timeline) + '</td>')
             html.append('<td>' + escape(event.start) + '</td>')
             hours = float(event.duration) / 60
-            hours_total += hours
-            html.append('<td align="right">' + escape(str(round(hours * 100) / 100)) + 'h</td>')
+            html.append('<td align="right">' + self.html_hours(hours) + 'h</td>')
             html.append('<td>' + escape(event.title) + '</td>')
             html.append('<td>' + escape(event.note) + '</td>')
             delivery_status_lines = map(escape, event.delivery_status_lines)
@@ -48,7 +53,7 @@ class receipts:
             '<tr>',
             '<th></th>',
             '<th></th>',
-            '<th align="right">' + escape(str(round(hours_total * 100) / 100)) + 'h</th>',
+            '<th align="right">' + self.html_hours(hours_total) + 'h</th>',
             '<th></th>',
             '<th></th>',
             '<th></th>',
@@ -58,8 +63,12 @@ class receipts:
 
         sender_address = self.config.get('receipt_sender_address')
         if receipt_to_sender:
-            subject = '[Timelines Receipt] ' + message['subject']
+            subject = 'Re: ' + message['subject']
             self.smtp.send(sender_address, message['from'], subject, "\n".join(text), "".join(html))
         if receipt_copy_to_addresses != '':
-            subject = '[Copy of Timlines Receipt for ' + message['from'] + '] ' + message['subject']
+            subject = 'Fwd [' + message['from'] + ']: ' + message['subject']
             self.smtp.send(sender_address, receipt_copy_to_addresses, subject, "\n".join(text), "".join(html))
+
+    # rs = rounded string
+    def html_hours(self, hrs):
+        return str(round(hrs * 100) / 100)
