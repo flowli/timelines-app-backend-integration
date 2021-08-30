@@ -4,5 +4,6 @@
 /ssl/
 /.idea/
 **/__pycache__/
-/deploy.sh
-/cron.sh
+/deploy
+/cron
+
