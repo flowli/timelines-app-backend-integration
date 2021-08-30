@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Runs the Timelines E-Mail Importer
+#   TODO: report runs and errors to a monitoring tool
+
+PYTHON="/usr/bin/python3"
+REL_DIR=`dirname $0`
+ABS_DIR=`cd ${REL_DIR} && pwd`
+
+INFO_LOG="${ABS_DIR}/logs/info.log"
+ERROR_LOG="${ABS_DIR}/logs/error.log"
+
+touch "${INFO_LOG}"
+touch "${ERROR_LOG}"
+
+"${PYTHON}" "${ABS_DIR}/run.py" \
+	1>>"${INFO_LOG}" \
+	2>>"${ERROR_LOG}"
