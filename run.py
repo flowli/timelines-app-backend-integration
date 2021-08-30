@@ -3,6 +3,7 @@
 import importlib
 import os
 import sys
+import datetime
 
 from lib.attachment_events_reader import AttachmentEventsReader
 from lib.config import Config
@@ -10,6 +11,12 @@ from lib.imap import Mailbox
 # from lib.processed import Processed
 from lib.processed import Processed
 from lib.receipts import receipts
+
+# 0. error handling: add date+time to output
+def exception_add_datetime(exctype, value, traceback):
+    sys.stderr.write("[ERROR][" + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "] \n")
+    sys.__excepthook__(exctype, value, traceback)
+sys.excepthook = exception_add_datetime
 
 app_path = os.path.dirname(os.path.realpath(__file__))
 
