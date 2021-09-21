@@ -13,6 +13,4 @@ ERROR_LOG="${ABS_DIR}/logs/error.log"
 touch "${INFO_LOG}"
 touch "${ERROR_LOG}"
 
-"${PYTHON}" "${ABS_DIR}/run.py" \
-	1>>"${INFO_LOG}" \
-	2>>"${ERROR_LOG}"
+"${PYTHON}" "${ABS_DIR}/run.py" 1>>"${INFO_LOG}" 2>>"${ERROR_LOG}"
