@@ -33,7 +33,7 @@ spans to your backend*
 2. The *project identifier* needs to be part of the Timeline name like `Project XYZ [123] …`. This could be automated if
    the Timelines app supported syncing project metadata with a backend.
 
-### Installation
+### Install and run
 
 1. Using Docker
     1. Install [Docker](https://www.docker.com/products/docker-desktop)
@@ -55,8 +55,8 @@ spans to your backend*
 ### Deployment
 
 1. Clone this repo
-2. Configure as described above
-3. Call `run.py` as often as needed, i. e. using a cronjob
+2. Install and configure as described in paragraph "Install and run"
+3. Run this tool whenever needed (i. e. using a cronjob or scheduled task)
 4. Monitoring:
     - make sure you get informed if the `run.py` exit code is not zero
     - you can log/append start+end date of runs as well as std{out,err} somewhere for reference
