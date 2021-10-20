@@ -36,12 +36,13 @@ spans to your backend*
 ### Installation
 
 1. Using Docker
-    1. install [Docker](https://www.docker.com/products/docker-desktop)
-    2. run `build-n-run`
-3. Without Docker
+    1. Install [Docker](https://www.docker.com/products/docker-desktop)
+    2. Run `./docker-run --build`
+2. Without Docker
     1. Ensure python3 is installed
     2. Install the dependencies with `pip3 install python-dotenv==0.17.0 imapclient==2.2.0 pickledb==0.9.2 requests==2.25.1`
     3. Your backend plugin's dependencies like [requests](https://docs.python-requests.org/en/master/)
+    4. Run `python3 run.py`
 
 ### Configuration
 
@@ -55,8 +56,9 @@ spans to your backend*
 
 1. Clone this repo
 2. Configure as described above
-3. Call run.py as often as needed, i. e. using a cronjob
+3. Call `run.py` as often as needed, i. e. using a cronjob
 4. Monitoring:
-    - make sure you get informed if the run.py exit code is not zero
+    - make sure you get informed if the `run.py` exit code is not zero
     - you can log/append start+end date of runs as well as std{out,err} somewhere for reference
-5. 🥳? buy me a ☕️ (you can paypal to florian.arndt@gmail.com) or 😤? open an issue or fork this repo
+5. Happy + want to support this project? You could paypal a donation to `florian.arndt@gmail.com` 🥳
+6. Unhappy? Open an issue or a fork 😄

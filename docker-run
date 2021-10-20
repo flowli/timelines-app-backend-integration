@@ -1,4 +1,7 @@
 #!/bin/bash
 
-docker build -t timelines-processor .
+if [ "$1" == "--build" ]; then
+  ./docker-build
+fi
+
 docker run -v $(pwd):/app timelines-processor

@@ -5,5 +5,3 @@
 /.idea/
 **/__pycache__/
 /deploy
-/cron
-
