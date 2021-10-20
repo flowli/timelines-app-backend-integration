@@ -35,8 +35,10 @@ spans to your backend*
 
 ### Installation
 
-1. Docker: install Docker and run `build-n-run`
-2. Non-docker
+1. Docker
+    1. install Docker
+    2. run `build-n-run`
+3. Non-docker
     1. Ensure python3 is installed
     2. Install the dependencies with `pip3 install python-dotenv==0.17.0 imapclient==2.2.0 pickledb==0.9.2 requests==2.25.1`
     3. Your backend plugin's dependencies like [requests](https://docs.python-requests.org/en/master/)
